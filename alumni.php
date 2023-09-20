@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1844638b49.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style2.css">
+    <title>Alumni</title>
+</head>
+
+<body style="background-color: #f5f5f5;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-white">
+        <!-- Content -->
+        <div class="container-fluid">
+            <!-- Brand -->
+            <img src="icon/logo.jpg" style="height: 40px;">
+            <span class="Alumni ms-2">Alumni SciTech SDU</span>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarToggle">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Menu -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarToggle">
+                <ul class="navbar-nav ">
+                    <li class="nav-item mx-3 mt-2">
+                        <a href="index.php" class="nav-font">หน้าแรก</a>
+                    </li>
+                    <li class="nav-item mx-3 mt-2">
+                        <a href="contact.html" class="nav-font">ติดต่อเรา</a>
+                    </li>
+                    <li class="nav-item mx-3 mt-2">
+                        <a href="https://forms.gle/a62Kmn2kbZV68iht6" class="nav-font">แบบประเมิน</a>
+                    </li>
+                    <li class="nav-item mx-3 mt-2">
+                        <a href="#" class="nav-font" data-bs-target="#showForm" data-bs-toggle="modal">เข้าสู่ระบบ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container-fluid">
+
+    <div class="contain_con">
+        <div class="textheader" style="text-align: center;margin-top:20px;"><font style="font-size: 30px;">ทำเนียบศิษย์เก่า</font></div>
+                    <hr><?php if (!empty($_POST["search"])) { ?> ผลการค้นหา : <?php print $_POST["search"];
+                                                                            } ?>
+                    <div class="flex-container wrap">
+                        <?php
+                        include 'connect_server.php';
+                        if (empty($_GET['page'])) {
+                            $page = 1;
+                        } else {
+                            $page = $_GET['page'];
+                        }
+                        $search = $_POST["search"];
+                        $num_per_page = 6;
+                        $start_from = ($page - 1) * 6;
+                        $sql = "SELECT * from education_show where name_stu like '%$search%'ORDER BY no_stu DESC limit $start_from,$num_per_page ";
+                        $result = $conn->query($sql);
+                        while ($row = $result->fetch_assoc()) {
+                        ?>
+                            <li class="flex-item">
+                                <div class="photo">
+                                    <div class="top_pic">
+                                        <img height="100px" width="95px" src="./img/<?php print $row["picture_stu"]; ?>">
+                                    </div>
+                                    <div class="botton_pic">
+                                        <a href="#">
+                                            <i style="font-size: 20px;float: right;position: relative;right: 5%;top: 12%;" class='bx bxs-trash deletebtn'></i>
+                                        </a>
+                                        <a href="?id=<?php print $row["no_stu"]; ?>">
+                                            <i style="font-size: 20px;float: right;position: relative;right: 10%;top: 12%;" class='bx bx-edit-alt'></i>
+                                        </a>
+                                    </div>
+                                </div><br>
+                                <p>ขื่อ : <?php print $row["name_stu"]; ?></p>
+                                <p>หลักสูตรที่จบ : <?php print $row["learn_end"]; ?></p>
+                                <p>ปีการศึกษา : <?php print $row["year_end"]; ?></p>
+                                <p>งานปัจจุบัน : <?php print $row["work_now"]; ?></p>
+                                <p>ผลงานดีเด่น : <?php print $row["certi_stu"]; ?></p>
+                            </li>
+
+                        <?php } ?>
+
+                    </div>
+                </div>
+        <?php
+        $getid_query = "SELECT  *  FROM  education_show where name_stu like '%$search%'  ";
+        $result = mysqli_query($conn, $getid_query);
+        $total_row = mysqli_num_rows($result);
+        $total_pages = ceil($total_row / $num_per_page); ?>
+
+        <div class="navigation">
+            <!--  ปุ่มกดไปหน้าแรกสุด  -->
+            <?php if ($page > 2) { ?>
+                <a class="next page-numbers" href="educate.php?page=1&search=<?php print $search; ?>">&laquo;</a>
+            <?php } ?>
+
+            <!--  ปุ่มกดไปหน้าก่อน  -->
+            <?php if ($page > 1) { ?>
+                <a class="next page-numbers" href="educate.php?page=<?php print($page - 1); ?>&search=<?php print $search; ?>">&lt;</a>
+            <?php } ?>
+
+
+            <!--  ปุ่มกดไปหน้าตามที่กด  -->
+            <?php if ($page > 2) {
+                $pree_page = $page - 2; ?>
+                <a class="page-numbers" href="educate.php?page=<?php print($page - 2); ?>&search=<?php print $search; ?>"><?php print $pree_page; ?></a>
+            <?php } ?>
+
+            <?php if ($page > 1) {
+                $pree_page = $page - 1; ?>
+                <a class="page-numbers" href="educate.php?page=<?php print($page - 1); ?>&search=<?php print $search; ?>"><?php print $pree_page; ?></a>
+            <?php } ?>
+
+            <!--  หน้า ณ ตอนนั้น  -->
+            <span aria-current="page" class="page-numbers current"><?php print $page ?></span>
+
+            <!--  ปุ่มกดไปหน้าตามที่กด  -->
+            <?php if ($page < $total_pages) {
+                $pree_page = $page + 1; ?>
+                <a class="page-numbers" href="educate.php?page=<?php print($page + 1); ?>&search=<?php print $search; ?>"><?php print $pree_page; ?></a>
+            <?php } ?>
+
+            <?php if ($page < $total_pages - 1) {
+                $pree_page = $page + 2; ?>
+                <a class="page-numbers" href="educate.php?page=<?php print($page + 2); ?>&search=<?php print $search; ?>"><?php print $pree_page; ?></a>
+            <?php } ?>
+
+            <!--  ปุ่มกดไปหน้าต่อไป  -->
+            <?php if ($page < ($total_pages - 1)) { ?>
+                <a class="next page-numbers" href="educate.php?page=<?php print($page + 1); ?>&search=<?php print $search; ?>">&gt;</a>
+            <?php } ?>
+
+            <!--  ปุ่มกดไปหน้าสุดท้าย  -->
+            <?php if (($page < $total_pages)) { ?>
+                <a class="next page-numbers" href="educate.php?page=<?php print($total_pages); ?>&search=<?php print $search; ?>">&raquo;</a>
+            <?php } ?>
+
+        </div>
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="showForm">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">เข้าสู่ระบบ</h5>
+                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="logon.php">
+                            <div class="form-group">
+                                <label>ชื่อผู้ใช้</label>
+                                <input type="text" name="user" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>รหัสผ่าน</label>
+                                <input type="password" class="form-control" name="pass" id="pass_box">
+                                <label for="recipient-name" class="addcol-form-label" onclick="password_show()">
+                                    <a href="#" class="add">
+                                        <font style="font-size: 10px;">show password</font>
+                                    </a>
+                                </label>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                        <input type="submit" name="submit" value="เข้าสู่ระบบ" class="btn btn-primary">
+                        </form>
+                        <button class="btn btn-success" data-bs-target="#showForm1" data-bs-toggle="modal">ลงทะเบียน</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="showForm1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">เข้าสู่ระบบ</h5>
+                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label>รหัสนักศึกษา</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group mt-1">
+                                <label>ชื่อ-นามสกุล</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group mt-1">
+                                <label>อีเมล</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group mt-1">
+                                <label>หมายเลขโทรศัพท์</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group mt-1">
+                                <label>หลักสูตรที่ท่านกำลังศึกษา หรือ สำเร็จการศึกษา</label>
+                                <select class="form-select" name="Course">
+                                    <option>วท.บ. วิทยาศาสตร์เทคโนโลยีการอาหาร</option>
+                                    <option>วท.บ. วิทยาศาสตร์สิ่งแวดล้อม</option>
+                                    <option>วท.บ. วิทยาศาสตร์การกีฬา</option>
+                                    <option>วท.บ. ชีววิทยาประยุกต์</option>
+                                    <option>วท.บ. เคมี</option>
+                                    <option>วท.บ. เทคโนโลยีเคมี</option>
+                                    <option>วท.บ. เทคโนโลยีอุตสาหกรรม</option>
+                                    <option>วท.บ. วิทยาการคอมพิวเตอร์</option>
+                                    <option>วท.บ. วิทยาการข้อมูลและการวิเคราะห์</option>
+                                    <option>วท.บ. เทคโนโลยีสารสนเทศ</option>
+                                    <option>ทล.บ. เทคโนโลยีสารสนเทศ</option>
+                                    <option>วท.บ. อุตสาหกรรมอาหารและการบริการ</option>
+                                    <option>วท.บ. เทคโนโลยีอุตสาหกรรม คหกรรมศาสตร์ทั่วไป</option>
+                                    <option>วท.บ. สถิติประยุกต์</option>
+                                    <option>วท.บ. วิทยาการความปลอดภัย</option>
+                                    <option>วท.บ. วิทยาศาสตร์เครื่องสำอาง</option>
+                                    <option>วท.บ. สิ่งแวดล้อมเมืองและอุตสาหกรรม</option>
+                                    <option>วท.บ. วิทยาศาสตร์และเทคโนโลยีสิ่งแวดล้อม</option>
+                                    <option>วท.บ. อาชีวอนามัยและความปลอดภัย</option>
+                                    <option>วท.บ. อนามัยสิ่งแวดล้อมและสาธารณภัย</option>
+                                    <option>วท.บ. ออกแบบผลิตภัณฑ์อุตสาหกรรม</option>
+                                    <option>ค.บ. วิทยาศาสตร์ทั่วไป</option>
+                                    <option>ค.บ./ศษ.บ. คณิตศาสตร์</option>
+                                    <option>ศษ.บ. ฟิสิกส์</option>
+                                    <option>อื่นๆ</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                        <button class="btn btn-primary">ยืนยัน</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <!-- Footer -->
+    <div class="container-fluid" style="width: auto; margin-top: 80px; background-color: white; border-top: 1px solid #e0e0e0e0;">
+        <div class="container d-flex justify-content-between mt-4">
+            <img src="icon/sdu.png" style="height: 50px;">
+        </div>
+        <hr>
+        <!-- Menu -->
+        <div class="card-group container">
+            <!-- Card 1 -->
+            <div class="card border-white">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Kanit', sans-serif; color: #424242;">ผู้สนใจเรียน</h5>
+                    <hr>
+                    <a href="https://tcas.dusit.ac.th/open-courses.html" class="ft">
+                        <p class="footer-font card-text">หลักสูตรที่เปิดรับ TCAS65</p>
+                    </a>
+                    <a href="https://tcas.dusit.ac.th/uploads/tcas64/fee2564.pdf" class="ft">
+                        <p class="footer-font card-text">อัตราค่าธรรมเนียมการศึกษา</p>
+                    </a>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card border-white">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Kanit', sans-serif; color: #424242;">สถาบัน / สำนัก</h5>
+                    <hr>
+                    <a href="https://arit.dusit.ac.th/2019/" class="ft">
+                        <p class="footer-font card-text">สำนักวิทยบริการและเทคโนโลยีสารสนเทศ</p>
+                    </a>
+                    <a href="https://regis.dusit.ac.th/main/" class="ft">
+                        <p class="footer-font card-text">สำนักส่งเสริมวิชาการและงานทะเบียน</p>
+                    </a>
+                    <a href="https://www.research.dusit.ac.th/" class="ft">
+                        <p class="footer-font card-text">สถาบันวิจัยและพัฒนา</p>
+                    </a>
+                    <a href="https://president.dusit.ac.th/main/" class="ft">
+                        <p class="footer-font card-text">สำนักงานมหาวิทยาลัย</p>
+                    </a>
+                </div>
+            </div>
+            <!-- Card-3 -->
+            <div class="card border-white">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Kanit', sans-serif; color: #424242;">บริการ</h5>
+                    <hr>
+                    <a href="https://academic.dusit.ac.th/academic/Login.sdu?mode=index" class="ft">
+                        <p class="footer-font card-text">ระบบบริหารการศึกษา</p>
+                    </a>
+                    <a href="https://ed.engdis.com/dusit#/login" class="ft">
+                        <p class="footer-font card-text">English Discoveries Online</p>
+                    </a>
+                    <a href="https://academic.dusit.ac.th/academic/GraduateCheck.sdu?mode=init" class="ft">
+                        <p class="footer-font card-text">ระบบตรวจสอบผู้สำเร็จการศึกษา</p>
+                    </a>
+                    <a href="http://guidance.dusit.ac.th/WEB/" class="ft">
+                        <p class="footer-font card-text">ศูนย์สนเทศแนะแนวการศึกษา กยศ. กรอ.</p>
+                    </a>
+                    <a href="https://regis.dusit.ac.th/calendar/" class="ft">
+                        <p class="footer-font card-text">ปฏิทินการศึกษา</p>
+                    </a>
+                    <a href="https://arit.dusit.ac.th/2019/it.html" class="ft">
+                        <p class="footer-font card-text">บริการด้านไอที</p>
+                    </a>
+                    <a href="http://www.thinnagorn.sci.dusit.ac.th/" class="ft">
+                        <p class="footer-font card-text">ค้นหาหมายเลขโทรศัพท์ภายใน มสด.</p>
+                    </a>
+                    <a href="http://arit.dusit.ac.th/main/databases/" class="ft">
+                        <p class="footer-font card-text">ฐานข้อมูลออนไลน์</p>
+                    </a>
+                    <a href="http://elearning.dusit.ac.th/course/category.php?id=3" class="ft">
+                        <p class="footer-font card-text">e-Learning คณะวิทย์ฯ</p>
+                    </a>
+                    <a href="http://dormitory.dusit.ac.th/" class="ft">
+                        <p class="footer-font card-text">หอพักศูนย์วิทยาศาสตร์</p>
+                    </a>
+                    <a href="https://hcdsuandusit.dusit.ac.th/" class="ft">
+                        <p class="footer-font card-text">บริการศูนย์พัฒนาทุนมนุษย์</p>
+                    </a>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="card border-white">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Kanit', sans-serif; color: #424242;">หน่วยงานมหาวิทยาลัย</h5>
+                    <hr>
+                    <a href="https://www.dusit.ac.th/" class="ft">
+                        <p class="footer-font card-text">มหาวิทยาลัยสวนดุสิต</p>
+                    </a>
+                    <a href="https://education.dusit.ac.th/" class="ft">
+                        <p class="footer-font card-text">คณะครุศาสตร์</p>
+                    </a>
+                    <a href="http://m-sci.dusit.ac.th/home/" class="ft">
+                        <p class="footer-font card-text">คณะวิทยาการจัดการ</p>
+                    </a>
+                    <a href="http://human.dusit.ac.th/main/" class="ft">
+                        <p class="footer-font card-text">คณะมนุษยศาสตร์และสังคมศาสตร์</p>
+                    </a>
+                    <a href="http://thmdusit.dusit.ac.th/main/" class="ft">
+                        <p class="footer-font card-text">โรงเรียนการท่องเที่ยวและการบริการ</p>
+                    </a>
+                    <a href="http://nurse.dusit.ac.th/" class="ft">
+                        <p class="footer-font card-text">คณะพยาบาลศาสตร์</p>
+                    </a>
+                    <a href="http://food.dusit.ac.th/main/" class="ft">
+                        <p class="footer-font card-text">โรงเรียนการเรือน</p>
+                    </a>
+                    <a href="http://slp.dusit.ac.th/" class="ft">
+                        <p class="footer-font card-text">โรงเรียนกฎหมายและการเมือง</p>
+                    </a>
+                    <a href="http://www.graduate.dusit.ac.th/main/" class="ft">
+                        <p class="footer-font card-text">บัณฑิตวิทยาลัย</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fliud" style="background-color:#003366; width:auto;height:40px; color:#fff; padding-top:10px; padding-bottom: 10px;">
+        <center>copyright © Alumni Faculty of Science and Technology | Suan Dusit University</center>
+    </div>
+</footer>
+
+</html>

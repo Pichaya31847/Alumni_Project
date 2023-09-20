@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="./CSS/bootstrap.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <link rel="stylesheet" media="screen and (min-width:0px)" href="./CSS/new-table.css"/>
+    <link rel="stylesheet" media="screen and (min-width:1000px)" href="./CSS/news-table1.css"/>
+    
+    
+    
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+    
+    
+    <title>ADMIN SUAN DUSIT UNIVERSITY</title>
+</head>
+<body>
+     <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo_content">
+        <div class="logo">
+            <i class='bx bxs-graduation'></i>
+            <div class="logo_name">SUAN DUSIT UNIVERSITY</div>
+        </div>
+        <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav_list">
+        <li>
+            <a href="addstudent.html">
+                <i class='bx bx-home-alt icon' ></i>
+                <span class="links_name">เพิ่มข้อมูลนักศึกษา</span>
+            </a>
+            <span class="tooltip">เพิ่มข้อมูลนักศึกษา</span>
+        </li>
+
+        <li>
+            <a href="index.html">
+                <i class='bx bx-bar-chart-alt-2 icon' ></i>
+                <span class="links_name">แก้ไขข้อมูลนักศึกษา</span>
+            </a>
+            <span class="tooltip">แก้ไขข้อมูลนักศึกษา</span>
+        </li>
+        <li>
+            <a href="news-input.html">
+                <i class='bx bx-bar-chart-alt icon' ></i>
+                <span class="links_name">เพิ่มข่าว ลบข่าว</span>
+            </a>
+            <span class="tooltip">เพิ่มข่าว ลบข่าว</span>
+        </li>
+        <li>
+            <a href="folder.html">
+                <i class='bx bxs-folder-plus icon'></i>
+                <span class="links_name">เพิ่มไฟล์</span>
+            </a>
+            <span class="tooltip">เพิ่มไฟล์</span>
+        </li>
+    </ul>
+    <div class="profile_content">
+        <div class="profile">
+            <div class="profile_details">
+                <img src="./img/logo.jpg" alt="">
+                <div class="name_job">
+                    <div class="name">Jakrawut Sainate</div>
+                    <div class="job">Web Designer</div>
+                </div>
+            </div>
+            <i class='bx bx-log-out' id="log_out"></i>
+        </div>
+    </div>
+</div>
+<!-- END SIDEBAR -->
+    
+<!-- ข้อมูลนักศึกษา -->
+    <section class="wrapper">
+        <div class="box content">
+            <div class="container">
+                <add style="font-size: 30px;font-weight:600">ข้อมูลนักศึกษา</add>
+                <form action="#">
+                    <div class="form first">
+                        <div class="details personal">
+                            <span style="font-size: 18px;font-weight:400;position: relative;top: 10px;" class="title">รายละเอียดของนักศึกษา</span>
+                            <!-- Search form -->
+                            <div class="md-form mt-0">
+                                <input  class="form-control" name="search" type="text" placeholder="Search" aria-label="Search">
+                            </div>
+                            <div style="position: relative;left: 900px;top:-30px;" class="row">
+                                <a href="#" style="font-size: 24px;font-weight:400;width: 30px;height:40px;" id="modal" data-toggle="modal" data-target="#basicModal">+</a>
+                              </div>
+                            </div>
+                          <!-- basic modal -->
+                          <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                              <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                  <h4 class="modal-title" id="myModalLabel">ADD NEWS</h4>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <form>
+                                          <div class="form-group">
+                                              <label>หัวข้อ</label>
+                                              <input type="text" class="form-control" required>
+                                          </div>
+                                          <div class="form-group">
+                                              <label>ไฟล์ภาพ</label>
+                                              <input type="file" class="form-control" multiple required>
+                                          </div>
+                                          <div class="form-group">
+                                              <label>คำอธิบาย</label>
+                                              <input type="text" class="form-control inputstl" id="dateofbirth" placeholder="คำอธิบาย" required>
+                                          </div>
+                                          <!-- ปฎิทิน -->
+                                          <!-- <div class="form-group">
+                                              <label>ปฎิทิน</label>
+                                              <input type="date" class="form-control inputstl" id="dateofbirth" placeholder="Select Date" required>
+                                          </div> -->
+                                          <!-- ปฎิทิน -->
+                                      </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                              </div>
+                              </div>
+                          </div>
+                            
+        
+                    <table style="border: 0;" class="table table-borderless">
+                        <thead style="text-align: center;">
+                            <tr>
+                                <th>ข่าวสาร</th>
+                                <th>แก้ไข</th>
+                                <th>ลบ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h2>
+                                        <a href="https://www.dusit.ac.th/2022/973691.html" title="แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022">แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022</a>
+                                    </h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="post-cover"><a style="position: relative;left:100px;" href="https://www.dusit.ac.th/2022/973691.html" title="แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022"><img src="https://www.dusit.ac.th/wp-content/uploads/2022/05/SDU-GUIDE-MAP-RGB-1-210x100.jpg" width="250px" alt="แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022" class="Thumbnail thumbnail loop-main "></a>
+                                    </div>		
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        <i style="display: flex;align-items: center;min-width: 60px;font-size: 35px;" class='bx bx-edit-alt'></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        <i style="display: flex;align-items: center;min-width: 60px;font-size: 35px;" class='bx bxs-trash deletebtn'></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>SDU GUIDE MAP</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <time datetime="2022-05-26" pubdate="">May 26, 2022</time>	/ 
+                                    <span class="category">
+                                        <a href="https://www.dusit.ac.th/category/current-students" rel="category tag">นักศึกษาปัจจุบัน</a>, 
+                                        <a href="https://www.dusit.ac.th/category/parent" rel="category tag">ผู้ปกครอง</a>, 
+                                        <a href="https://www.dusit.ac.th/category/interested" rel="category tag">ผู้สนใจ</a>, 
+                                        <a href="https://www.dusit.ac.th/category/alumni" rel="category tag">ศิษย์เก่า</a>, 
+                                        <a href="https://www.dusit.ac.th/category/%e0%b8%88%e0%b8%b2%e0%b8%81%e0%b8%ab%e0%b8%99%e0%b9%88%e0%b8%a7%e0%b8%a2%e0%b8%87%e0%b8%b2%e0%b8%99%e0%b8%a0%e0%b8%b2%e0%b8%a2%e0%b8%99%e0%b8%ad%e0%b8%81" rel="category tag">หน่วยงานภายนอก</a>, 
+                                        <a href="https://www.dusit.ac.th/category/staff" rel="category tag">อาจารย์/เจ้าหน้าที่</a></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <tr>
+                                    <td>
+                                        <h2>
+                                            <a href="https://www.dusit.ac.th/2022/973691.html" title="แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022">แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022</a>
+                                        </h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="post-cover"><a style="position: relative;left:100px;" href="https://www.dusit.ac.th/2022/973691.html" title="แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022"><img src="https://www.dusit.ac.th/wp-content/uploads/2022/05/SDU-GUIDE-MAP-RGB-1-210x100.jpg" width="250px" alt="แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022" class="Thumbnail thumbnail loop-main "></a>
+                                        </div>		
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <i style="display: flex;align-items: center;min-width: 60px;font-size: 35px;" class='bx bx-edit-alt'></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <i style="display: flex;align-items: center;min-width: 60px;font-size: 35px;" class='bx bxs-trash deletebtn'></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>SDU GUIDE MAP</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <time datetime="2022-05-26" pubdate="">May 26, 2022</time>	/ 
+                                        <span class="category">
+                                            <a href="https://www.dusit.ac.th/category/current-students" rel="category tag">นักศึกษาปัจจุบัน</a>, 
+                                            <a href="https://www.dusit.ac.th/category/parent" rel="category tag">ผู้ปกครอง</a>, 
+                                            <a href="https://www.dusit.ac.th/category/interested" rel="category tag">ผู้สนใจ</a>, 
+                                            <a href="https://www.dusit.ac.th/category/alumni" rel="category tag">ศิษย์เก่า</a>, 
+                                            <a href="https://www.dusit.ac.th/category/%e0%b8%88%e0%b8%b2%e0%b8%81%e0%b8%ab%e0%b8%99%e0%b9%88%e0%b8%a7%e0%b8%a2%e0%b8%87%e0%b8%b2%e0%b8%99%e0%b8%a0%e0%b8%b2%e0%b8%a2%e0%b8%99%e0%b8%ad%e0%b8%81" rel="category tag">หน่วยงานภายนอก</a>, 
+                                            <a href="https://www.dusit.ac.th/category/staff" rel="category tag">อาจารย์/เจ้าหน้าที่</a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>6411011660003</td>
+                                    <td>
+                                        <a href="#">
+                                            <i style="display: flex;align-items: center;min-width: 60px;font-size: 35px;" class='bx bx-edit-alt'></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <i style="display: flex;align-items: center;min-width: 60px;font-size: 35px;" class='bx bxs-trash deletebtn'></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <tr>
+                                <td>
+                                    <h2>
+                                        <a href="https://www.dusit.ac.th/2022/973691.html" title="แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022">แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022</a>
+                                    </h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="post-cover"><a style="position: relative;left:100px;" href="https://www.dusit.ac.th/2022/973691.html" title="แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022"><img src="https://www.dusit.ac.th/wp-content/uploads/2022/05/SDU-GUIDE-MAP-RGB-1-210x100.jpg" width="250px" alt="แผนผังมหาวิทยาลัยสวนดุสิต SDU GUIDE MAP 2022" class="Thumbnail thumbnail loop-main "></a>
+                                    </div>		
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        <i style="display: flex;align-items: center;min-width: 60px;font-size: 35px;" class='bx bx-edit-alt'></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        <i style="display: flex;align-items: center;min-width: 60px;font-size: 35px;" class='bx bxs-trash deletebtn'></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>SDU GUIDE MAP</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <time datetime="2022-05-26" pubdate="">May 26, 2022</time>	/ 
+                                    <span class="category">
+                                        <a href="https://www.dusit.ac.th/category/current-students" rel="category tag">นักศึกษาปัจจุบัน</a>, 
+                                        <a href="https://www.dusit.ac.th/category/parent" rel="category tag">ผู้ปกครอง</a>, 
+                                        <a href="https://www.dusit.ac.th/category/interested" rel="category tag">ผู้สนใจ</a>, 
+                                        <a href="https://www.dusit.ac.th/category/alumni" rel="category tag">ศิษย์เก่า</a>, 
+                                        <a href="https://www.dusit.ac.th/category/%e0%b8%88%e0%b8%b2%e0%b8%81%e0%b8%ab%e0%b8%99%e0%b9%88%e0%b8%a7%e0%b8%a2%e0%b8%87%e0%b8%b2%e0%b8%99%e0%b8%a0%e0%b8%b2%e0%b8%a2%e0%b8%99%e0%b8%ad%e0%b8%81" rel="category tag">หน่วยงานภายนอก</a>, 
+                                        <a href="https://www.dusit.ac.th/category/staff" rel="category tag">อาจารย์/เจ้าหน้าที่</a></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>6411011660003</td>
+                                <td>
+                                    <a href="#">
+                                        <i style="display: flex;align-items: center;min-width: 60px;font-size: 35px;" class='bx bx-edit-alt'></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        <i style="display: flex;align-items: center;min-width: 60px;font-size: 35px;" class='bx bxs-trash deletebtn'></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+               
+                <div class="d-flex m-4 justify-content-center ">
+                  <div class="navigation">
+                      <span aria-current="page" class="page-numbers current">1</span>
+                      <a class="page-numbers" href="#">2</a>
+                      <a class="page-numbers" href="#">3</a>
+                      <span class="page-numbers dots">…</span>
+                      <a class="page-numbers" href="#">21</a>
+                      <a class="next page-numbers" href="#">Next →</a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </section>
+    <!-- ข้อมูลนักศึกษา -->
+
+    <!-- JS -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src='https://unpkg.com/popper.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
+    
+    <script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+        let searchBtn = document.querySelector(".bx-search");
+        
+        btn.onclick = function() {
+            sidebar.classList.toggle("active");
+        }
+        searchBtn.onclick = function() {
+            sidebar.classList.toggle("active");
+        }
+        
+        </script>
+</body>
+</html>

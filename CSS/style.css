@@ -1,0 +1,127 @@
+.flex{
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0e0;
+    margin-top: 20px;
+}
+
+.Alumni {
+    font-family: 'Playfair Display', serif; 
+    font-size: 20px; color: #c69320 ;
+    font-style: italic;
+}
+
+.item{
+    border: 1px solid white;
+    width: 300px;
+    height: 150px;
+    margin: 10px;
+    padding: 10px;
+    text-align: left;
+    border-radius: 10px;
+}
+
+.archives-columns-one .loop-post-single {
+	font-size: 13px;
+	line-height: 1.5em;
+	margin-bottom: 10px;
+}
+
+.nav-font {
+    text-decoration: none; 
+    font-family: 'Kanit', sans-serif; 
+    color: gray;
+}
+
+.nav-font:hover {
+    text-decoration: none;
+    font-family: 'Kanit', sans-serif; 
+    color: white;
+    padding: 7px;
+    background-color: #0066ff;
+    border-radius: 7px;
+}
+
+.post-cover{
+    margin: 0px 20px 0px 0px;
+}
+
+.post-meta {
+    font-size: 12px;
+    margin: 0 0 5px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.job-font {
+    font-family: 'Kanit', sans-serif; 
+    color: #424242;
+}
+
+h2 a {
+    color: #003366;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+div.navigation {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+
+div.navigation .current {
+    font-weight: bold;
+    background-color: #0d3c6c;
+    color: #fff;
+    padding: 7px 10px;
+    line-height: 24px;
+}
+
+div.navigation a {
+    padding: 7px 10px;
+    line-height: 24px;
+    background-color: #f1f1f1;
+    color: #0d3c6c;
+}
+
+#map {
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+}
+
+.bs-example{
+    margin: 20px;
+}
+
+.footer-font {
+    font-size: 15px;
+    font-family: 'Kanit', sans-serif; 
+    color: #424242;
+    
+}
+
+.footer-font:hover {
+    text-decoration: none;
+    font-size: 15px;
+    font-family: 'Kanit', sans-serif; 
+    color: white;
+    background-color: #0d3c6c;
+}
+
+.alumni-box {
+    border: 1px solid #e0e0e0e0;
+    background-color: white;
+    padding: 20px;
+    text-align: left;
+    border-radius: 10px;
+}
+
+.contain_con {
+    position: relative;
+}
+
+
